@@ -7,14 +7,22 @@ import java.util.*;
 
 public class CountryCodeLister {
     public List<CountryCode> retrieveCountries() {
-        Set<String> isoCountries = Locale.getISOCountries(Locale.IsoCountryCode.PART1_ALPHA3);
+        String[] isoCountries = Locale.getISOCountries();
 
         List<CountryCode> countryCodeList = new ArrayList<>();
-        for (String countryCode : isoCountries) {
-            Locale locale = new Locale("en", countryCode);
-            countryCodeList.add(new CountryCode(countryCode, locale.getISO3Language()));
+        for (String alpha2Code : isoCountries) {
+            try {
+                Locale locale = new Locale("", alpha2Code);
+                String alpha3Code = locale.getISO3Country();
+                String countryName = locale.getDisplayCountry(Locale.ENGLISH);
+                if (!countryName.isEmpty()) {
+                    countryCodeList.add(new CountryCode(alpha2Code, alpha3Code, countryName));
+                }
+            } catch (Exception e) {
+                System.err.println("Hubo un error con el código: " + alpha2Code);
+            }
         }
-        countryCodeList.sort(Comparator.comparing(CountryCode::getCode));
+        countryCodeList.sort(Comparator.comparing(CountryCode::getAlpha3Code));
         return countryCodeList;
     }
 }

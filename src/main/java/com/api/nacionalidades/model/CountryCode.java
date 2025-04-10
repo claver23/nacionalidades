@@ -3,12 +3,30 @@ package com.api.nacionalidades.model;
 
 public class CountryCode {
 
-    public String getCode() {
-        return code;
+    String alpha2Code;
+    String alpha3Code;
+    String name;
+
+    public CountryCode(String alpha2Code, String alpha3Code, String name) {
+        this.alpha2Code = alpha2Code;
+        this.alpha3Code = alpha3Code;
+        this.name = name;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public String getAlpha2Code() {
+        return alpha2Code;
+    }
+
+    public void setAlpha2Code(String alpha2Code) {
+        this.alpha2Code = alpha2Code;
+    }
+
+    public String getAlpha3Code() {
+        return alpha3Code;
+    }
+
+    public void setAlpha3Code(String alpha3Code) {
+        this.alpha3Code = alpha3Code;
     }
 
     public String getName() {
@@ -18,15 +36,6 @@ public class CountryCode {
     public void setName(String name) {
         this.name = name;
     }
-
-    String code;
-    String name;
-
-    public CountryCode(String code, String name) {
-        this.code = code;
-        this.name = name;
-    }
-
 
 
 }
